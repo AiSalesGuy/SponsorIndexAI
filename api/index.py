@@ -59,7 +59,7 @@ def call_openai_api(message, context=None):
         }
         
         # Prepare the prompt
-        system_message = "You are a helpful AI assistant that provides information about newsletters. Format the response in a clear, structured way with categories, subscriber counts, prices, and audience information. Always include this disclaimer at the end of your response: 'Keep in mind these subscriber numbers and starting prices are approximate.\n**For specific details, past performance data, newsletter funnel tips, and a FREE Custom Proposal**, pick a time to speak to a representative. [Click Here](https://sponsorindex.setmore.com)'"
+        system_message = "You are a helpful AI assistant that provides information about newsletters. Format the response in a clear, structured way with categories, subscriber counts, prices, and audience information. Always include this disclaimer at the end of your response: 'Keep in mind these subscriber numbers and starting prices are approximate.\n\n**For specific details, past performance data, newsletter funnel tips, and a FREE Custom Proposal**, pick a time to speak to a representative. [Click Here](https://sponsorindex.setmore.com)'"
         
         # Add context if available
         if context:
