@@ -52,17 +52,18 @@ except Exception as e:
 
 # Load data
 try:
-    # Determine if we're running on Vercel or locally
+    # Simplify CSV loading for Vercel - focus on speed
     is_vercel = os.environ.get('VERCEL') == '1'
     
     if is_vercel:
         # When deployed on Vercel: read CSV from the packaged data
-        # Note: This requires the CSV to be included in the deployment package
         logger.info("Running on Vercel, loading CSV from package data")
         
         # For Vercel, the CSV file should be accessible relative to the current file
         csv_path = os.path.join(os.path.dirname(__file__), 'data', 'context.csv')
-        df = pd.read_csv(csv_path)
+        
+        # Use a more memory-efficient approach for Vercel
+        df = pd.read_csv(csv_path, dtype={'Category': 'category'})
     else:
         # Local development: read directly from file system
         logger.info("Running locally, loading CSV from file system")
