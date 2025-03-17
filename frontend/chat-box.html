@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            margin: 0;
+            padding: 10px;
+            font-family: Arial, sans-serif;
+            height: 100vh;
+            overflow-y: auto;
+        }
+        
+        .user-message {
+            display: flex;
+            justify-content: flex-end;
+            margin: 10px 0;
+        }
+        
+        .assistant-message {
+            display: flex;
+            justify-content: flex-start;
+            margin: 10px 0;
+        }
+        
+        .user-text {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 15px;
+            max-width: 70%;
+            word-wrap: break-word;
+        }
+        
+        .assistant-text {
+            background-color: #f0f0f0;
+            color: #333;
+            padding: 10px 15px;
+            border-radius: 15px;
+            max-width: 70%;
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+<body>
+    <div id="chat-messages"></div>
+
+    <script>
+        const chatMessages = document.getElementById('chat-messages');
+        
+        // Listen for messages from the parent window
+        window.addEventListener('message', function(event) {
+            const data = event.data;
+            
+            if (data.type === 'addMessage') {
+                // Add the new message
+                chatMessages.insertAdjacentHTML('beforeend', data.html);
+                
+                // Scroll to bottom
+                window.scrollTo(0, document.body.scrollHeight);
+            }
+        });
+    </script>
+</body>
+</html> 
