@@ -310,11 +310,20 @@ async def chat(request: ChatRequest):
         )
         
         logger.info("Successfully processed chat message")
-        return JSONResponse(content={"response": response})
+        return {"response": response}
         
     except Exception as e:
         logger.error(f"Error in chat endpoint: {str(e)}")
-        raise HTTPException(status_code=500, detail=str(e))
+        logger.error(f"Traceback: {traceback.format_exc()}")
+        return JSONResponse(
+            status_code=500,
+            content={"detail": f"Error processing request: {str(e)}"}
+        )
+
+# Add a simple health check endpoint
+@app.get("/api/health")
+async def health_check():
+    return {"status": "ok", "message": "API is running"}
 
 if __name__ == "__main__":
     import uvicorn
